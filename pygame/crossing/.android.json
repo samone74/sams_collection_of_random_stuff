@@ -1,0 +1,1 @@
+{"layout": "internal", "orientation": "landscape", "package": "crossing.com", "include_pil": false, "expansion": false, "name": "crossing", "source": false, "icon_name": "crossing", "version": "1", "permissions": ["VIBRATE"], "include_sqlite": false, "numeric_version": "1"}
