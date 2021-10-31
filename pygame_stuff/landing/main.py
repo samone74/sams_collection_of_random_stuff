@@ -1,31 +1,24 @@
-from snake import *
-from number import *
+import pygame
 from pygame.locals import *
 import sys
+from lander import Lander
 
 
 def main():
-    back_ground_color = get_color('gold')
+    back_ground_color = get_color('white')
     win_width = 600  # width of the program's window, in pixels
     win_height = 600  # height in pixels
     fps = 25  # number of frames per second
     pygame.init()
     display_surf = pygame.display.set_mode((win_width, win_height))
-
     pygame.mouse.set_visible(False)
     # making a clock
     fps_clock = pygame.time.Clock()
-    # creating a Display surface and an alpha surface
-    snakes = []
-    start_size = 10
-    snakes.append(Snake(get_color('silver'),  10.0, 10.0, 10, K_LEFT, K_RIGHT, win_width, win_height, start_size))
-    number = Number(30, 40, 20, back_ground_color, get_color('red'), 9)
-    number.change_position_and_number(win_width, win_height, snakes)
-    number_plain = pygame.sprite.RenderPlain(number)
-    snakes.append(Snake(get_color('fuchsia'),  10.0, 300.0, 10, K_a, K_d, win_width, win_height, start_size))
-    # snakes.append(Snake(get_color('blue'),  10.0, 100.0, 10, K_f, K_g, win_width, win_height, start_size))
-    # snakes.append(Snake(get_color('purple'),  10.0, 150.0, 10, K_j, K_k, win_width, win_height, start_size))
 
+    # adding objects
+    lander = Lander(get_color('black'), 10, 10, 10)
+    sprite_render_plain = pygame.sprite.RenderPlain(lander)
+    # main game loop
     while True:
         for event in pygame.event.get():
             if event.type == QUIT:
@@ -33,24 +26,19 @@ def main():
             elif event.type == KEYDOWN:
                 if event.key == K_ESCAPE:
                     terminate()
-                for snake in snakes:
-                    snake.turn(event.key)
+                if event.key == K_LEFT:
+                    lander.move(1)
+                if event.key == K_RIGHT:
+                    lander.move(2)
+                if event.key == K_UP:
+                    lander.move(3)
+                if event.key == K_DOWN:
+                    lander.move(4)
+
         display_surf.fill(back_ground_color)
-        for snake in snakes:
-            snake.update()
-            if snake.self_collide() or snake.other_collide(snakes):
-                snakes.remove(snake)
-                if not snakes:
-                    terminate()
-                continue
-            if snake.collide_number(number):
-                number.change_position_and_number(win_width, win_height, snakes)
-
-            snake.all_sprites.draw(display_surf)
-        number_plain.update()
-        number_plain.draw(display_surf)
+        sprite_render_plain.update()
+        sprite_render_plain.draw(display_surf)
         pygame.display.update()
-
         fps_clock.tick(fps)
 
 
