@@ -1,0 +1,11 @@
+smart_meter:
+  address: '/dev/ttyUSB0'
+  baud_rate: 115200
+overall:
+  interval: 60
+  output_path: '/media/pi/MyPassport/'
+  file_name: 'smartmeter.csv'
+good_we_pvv:
+  ip_address: '192.168.178.32'
+  objects_to_read:
+    - ppv
