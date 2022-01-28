@@ -1,0 +1,11 @@
+settings:
+  host: '192.168.178.23'
+  port: 2500
+readers:
+  smart_meter:
+    address: '/dev/ttyUSB0'
+    baud_rate: 115200
+  good_we_pvv:
+    ip_address: '192.168.178.32'
+    objects_to_read:
+      - ppv
