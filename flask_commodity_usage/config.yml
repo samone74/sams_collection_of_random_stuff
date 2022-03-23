@@ -1,3 +1,5 @@
 settings:
   host: '192.168.178.23'
   port: 2500
+database:
+  data_folder: 'X:\smart_meter\'
